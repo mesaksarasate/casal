@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Young+Serif&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&icon_names=add,add_comment,call_end,hourglass_empty,image,pause,play_circle,videocam,chevron_left,church,cloud,directions_walk,foggy,movie,park,partly_cloudy_day,rainy,sunny,task_alt,thunderstorm,dark_mode,light_mode,center_focus_strong,crop,rotate_right,arrow_back,arrow_forward,arrow_upward,auto_awesome,baby_changing_station,badge,bedtime,build,calendar_month,call,celebration,chat,check,check_circle,checklist,chevron_right,child_care,close,content_copy,contrast,cottage,cycle,delete,dentistry,description,emergency,emoji_people,event,family_restroom,favorite,fitness_center,flag,format_size,graphic_eq,health_and_safety,history,home,hub,image,inventory_2,key,language,link,link_off,local_drink,location_on,lock,logout,luggage,medical_services,medication,menu_book,mic,monitor_heart,monitor_weight,notifications,payments,person,photo_camera,play_arrow,pregnant_woman,quiz,radio_button_checked,receipt_long,remove,restaurant,savings,schedule,science,search,send,sentiment_dissatisfied,sentiment_neutral,sentiment_satisfied,sentiment_very_dissatisfied,sentiment_very_satisfied,shield,shopping_cart,sos,speed,stethoscope,stop,straighten,swap_horiz,tune,two_wheeler,vaccines,vibration,view_carousel,volume_up,warning,water_drop&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&icon_names=add,add_comment,arrow_back,arrow_forward,arrow_upward,auto_awesome,baby_changing_station,badge,bedtime,build,calendar_month,call,call_end,celebration,center_focus_strong,chat,check,check_circle,checklist,chevron_left,chevron_right,child_care,church,close,cloud,content_copy,contrast,cottage,crop,cycle,dark_mode,delete,dentistry,description,directions_walk,emergency,emoji_people,event,family_restroom,favorite,fitness_center,flag,foggy,format_size,graphic_eq,health_and_safety,history,home,hourglass_empty,hub,image,inventory_2,key,language,light_mode,link,link_off,local_drink,location_on,lock,logout,luggage,medical_services,medication,menu_book,mic,monitor_heart,monitor_weight,movie,notifications,park,partly_cloudy_day,pause,payments,person,photo_camera,play_arrow,play_circle,pregnant_woman,quiz,radio_button_checked,rainy,receipt_long,remove,restaurant,rotate_right,savings,schedule,science,search,send,sentiment_dissatisfied,sentiment_neutral,sentiment_satisfied,sentiment_very_dissatisfied,sentiment_very_satisfied,shield,shopping_cart,sos,speed,stethoscope,stop,straighten,sunny,swap_horiz,task_alt,thunderstorm,tune,two_wheeler,vaccines,vibration,videocam,view_carousel,visibility,visibility_off,volume_up,warning,water_drop&display=block">
 </head>
 <body>
 <style>
@@ -582,6 +582,44 @@ details.perf summary::-webkit-details-marker{display:none}
 .call.vid .cinfo{display:none}
 .call .cbar{position:absolute;z-index:2;left:0;right:0;bottom:calc(36px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:24px}
 .cb{width:64px;height:64px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;display:grid;place-items:center}.cb .ms{font-size:28px}.cb.no{background:#E5484D}.cb.ok{background:#2E9E5B}.cb.off{background:#fff;color:#111}
+/* entrada (v12) */
+body.authmode .top,body.authmode #tabs,body.authmode #iaOrb{display:none!important}
+.auth{position:fixed;inset:0;z-index:5;overflow-y:auto;background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.auth .bgl{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.auth .bgl path{fill:none;stroke:var(--primary);stroke-width:2.2;opacity:.16;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:alDraw 2.4s cubic-bezier(.4,0,.2,1) .2s forwards}
+.auth .bgl path+path{animation-delay:.45s}
+.auth .bgl circle{fill:var(--primary);opacity:0;transform-box:fill-box;transform-origin:center;animation:alDot .6s 2.3s forwards,alPulse 3.6s 3s ease-in-out infinite}
+@keyframes alDraw{to{stroke-dashoffset:0}}@keyframes alDot{to{opacity:.22}}@keyframes alPulse{50%{transform:scale(1.25)}}
+.auth .in{position:relative;z-index:1;width:100%;max-width:380px;margin:auto 0;display:flex;flex-direction:column;gap:22px;animation:alUp .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes alUp{from{opacity:0;transform:translateY(14px)}}
+.auth .hd{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.auth .hd img{width:68px;height:68px;border-radius:18px;box-shadow:0 10px 30px -12px color-mix(in srgb,var(--fg) 45%,transparent)}
+.auth .wm{display:flex;align-items:baseline;gap:8px}.auth .wm b{font:400 34px/1 var(--f-brand);color:var(--primary);letter-spacing:-.01em}.auth .wm span{font:600 15px var(--f-body);color:var(--muted)}
+.auth .hi{font-size:15px;color:var(--muted)}
+.auth h1{margin:0;font:500 24px/1.25 var(--f-body);text-align:center;text-wrap:balance;color:var(--fg)}
+.auth .fl{position:relative}
+.auth .fl input{width:100%;box-sizing:border-box;height:58px;padding:24px 16px 8px;border:1.5px solid transparent;border-radius:16px;background:var(--surface);color:var(--fg);font:500 16px var(--f-body);outline:none;transition:border-color .2s,background .2s;min-height:0}
+.auth .fl input:focus{border-color:var(--primary);background:var(--surface)}
+.auth .fl label{position:absolute;left:17px;top:19px;font:400 16px var(--f-body);color:var(--muted);pointer-events:none;transition:all .18s;display:block;margin:0}
+.auth .fl input:focus+label,.auth .fl input:not(:placeholder-shown)+label{top:9px;font-size:12px;font-weight:500;color:var(--primary)}
+.auth .fl .pre{position:absolute;left:16px;top:26px;font:500 16px var(--f-body);color:var(--muted);opacity:0;transition:opacity .15s}
+.auth .fl.at input{padding-left:31px}.auth .fl.at input:focus~.pre,.auth .fl.at input:not(:placeholder-shown)~.pre{opacity:1}
+.auth .eye{position:absolute;right:6px;top:7px;width:44px;height:44px;border:0;background:none;color:var(--muted);display:grid;place-items:center;border-radius:50%}
+.auth .fields{display:flex;flex-direction:column;gap:12px}
+.auth .go{height:56px;border:0;border-radius:28px;background:var(--primary);color:var(--on-primary,#fff);font:600 16px var(--f-body);letter-spacing:.2px;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,opacity .2s;width:100%}
+.auth .go:active{transform:scale(.98)}.auth .go[disabled]{opacity:.55}
+.auth .lk{border:0;background:none;color:var(--primary);font:600 14px var(--f-body);padding:10px;align-self:center}
+.auth .alt{text-align:center;font-size:14px;color:var(--muted)}.auth .alt .lk{padding:4px;display:inline}
+.auth .err{min-height:18px;margin:-6px 0 -8px;font-size:13px;color:var(--bad);text-align:center}
+.auth .bar{display:flex;align-items:center;gap:12px}
+.auth .bar .iconbtn{margin-left:-10px}
+.auth .prog{flex:1;display:flex;gap:6px}.auth .prog i{flex:1;height:4px;border-radius:2px;background:color-mix(in srgb,var(--fg) 12%,transparent);transition:background .3s}.auth .prog i.on{background:var(--primary)}
+.auth .sx{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.auth .sx button{height:52px;border-radius:16px;border:1.5px solid transparent;background:var(--surface);color:var(--fg);font:500 15px var(--f-body)}
+.auth .sx button.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 10%,var(--surface));color:var(--primary)}
+.auth .stp{display:flex;flex-direction:column;gap:18px;animation:alUp .35s cubic-bezier(.2,.8,.2,1) both}
+.auth .sub{margin:-8px 0 0;text-align:center;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){.auth *{animation:none!important}.auth .bgl path{stroke-dashoffset:0}.auth .bgl circle{opacity:.22}}
 /* v9: proporções por dispositivo */
 .lock{overflow-y:auto}
 @media (max-width:340px){
@@ -1647,7 +1685,7 @@ function sheetHTML1(k){const bar=t=>`<div class="sbar"><button class="iconbtn" d
 /* ================= AÇÕES NOVAS ================= */
 async function fotoComprimida(f,max){const url=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f)});
   const img=await new Promise((ok,er)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=er;i.src=url});const s=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext("2d").drawImage(img,0,0,c.width,c.height);return c.toDataURL("image/jpeg",.78)}
-function act(a,el){if(actOf(a,el)!==false)return;if(actV11(a,el)!==false)return;if(actV10(a,el)!==false)return;if(actCapa(a,el)!==false)return;if(actC(a,el)!==false)return;if(act9(a,el)!==false)return;if(act8(a,el)!==false)return;if(act7(a,el)!==false)return;act0(a,el)}
+function act(a,el){if(actAuth(a,el)!==false)return;if(actOf(a,el)!==false)return;if(actV11(a,el)!==false)return;if(actV10(a,el)!==false)return;if(actCapa(a,el)!==false)return;if(actC(a,el)!==false)return;if(act9(a,el)!==false)return;if(act8(a,el)!==false)return;if(act7(a,el)!==false)return;act0(a,el)}
 function act7(a,el){const o=outro(),P=S.perfil;
   switch(a){
   case "pg":pg=el.dataset.p;render();window.scrollTo(0,0);{const m=$("#main");m.offsetHeight;m.classList.add("view")}fx("nav");return;
@@ -2079,7 +2117,7 @@ function tempoAte(d){const a=new Date(),b2=new Date(d);let m=(b2.getFullYear()-a
   const t=y?pl(y,"ano","anos")+(r?` e ${pl(r,"mês","meses")}`:""):pl(r,"mês","meses");return m>0?t:pl(Math.ceil((b2-a)/DAY),"dia","dias")}
 /* tema */
 const temaEscuro=()=>S.cfg.theme==="dark"||(S.cfg.theme==="auto"&&matchMedia("(prefers-color-scheme: dark)").matches);
-function topoV10(){if(!ativo()){$("#meBtn").hidden=!logado();$("#bodaBtn").hidden=true;$("#themeBtn").hidden=true;delete document.documentElement.dataset.boda;$("#wall").innerHTML="";return}const on=ativo(),N=nivel(),x=bodaHoje()||N.atual||N.prox,b=$("#bodaBtn"),t=$("#themeBtn");$("#meBtn").hidden=false;
+function topoV10(){document.body.classList.toggle("authmode",!logado());if(!ativo()){$("#meBtn").hidden=!logado();$("#bodaBtn").hidden=true;$("#themeBtn").hidden=true;delete document.documentElement.dataset.boda;$("#wall").innerHTML="";return}const on=ativo(),N=nivel(),x=bodaHoje()||N.atual||N.prox,b=$("#bodaBtn"),t=$("#themeBtn");$("#meBtn").hidden=false;
   if(b){b.hidden=!on||!x;if(x)b.innerHTML=badge2(x,28,!bodaHoje()&&!N.atual);b.classList.toggle("party",!!bodaHoje());b.classList.toggle("on",tab==="casal")}
   if(t){t.hidden=true;t.innerHTML=ms(temaEscuro()?"light_mode":"dark_mode");t.setAttribute("aria-label",temaEscuro()?"Tema claro":"Tema escuro")}
   if(tab==="casal"){const lv=$("#levels");if(lv)lv.scrollLeft=Math.max(0,N.feitos.length*86-lv.clientWidth+160)}
@@ -2467,6 +2505,51 @@ function bootOficial(){
 function send(o2){return enviarMsg(o2)}
 function sheetHTML(k){if(k==="pinDef")return`<div class="sbar"><button class="iconbtn" data-a="close" aria-label="Fechar">${ms("close")}</button><h1>PIN de bloqueio</h1></div><div class="wrap"><label>4 números<input type="password" inputmode="numeric" maxlength="4" id="pinIn" autocomplete="off"></label><div class="muted small">Fica guardado só neste celular.</div><button class="btn primary xl" data-a="pinSalvar">Salvar PIN</button></div>`;return sheetHTML2(k)}
 if(OF.on)save=saveOficial;
+
+/* ---------- entrada (v12) ---------- */
+let cad={p:1,nome:"",sexo:"",user:"",email:"",pw:"",pw2:""},verPw=false;
+const saudHora=()=>{const h=new Date().getHours();return h<5?"Boa noite":h<12?"Bom dia":h<18?"Boa tarde":"Boa noite"};
+const AUTH_BG=`<svg class="bgl" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path pathLength="1" d="M-20 820C40 640 60 470 150 340S197 160 197 40"/><path pathLength="1" d="M420 820C360 640 340 470 250 340S203 160 203 40"/></svg>`;
+function fld(id,lab,type,val,extra){return`<div class="fl ${extra==="at"?"at":""}"><input id="${id}" type="${type}" placeholder=" " value="${esc(val||"")}" autocomplete="${{lId:"username",lPw:"current-password",cNome:"name",cUser:"username",cMail:"email",cPw:"new-password",cPw2:"new-password"}[id]||"off"}" ${type==="text"&&/User|lId/.test(id)?'autocapitalize="none" spellcheck="false"':""}><label for="${id}">${lab}</label>${extra==="at"?'<span class="pre">@</span>':""}${type==="password"||extra==="pw"?`<button type="button" class="eye" data-a="verPw" aria-label="${verPw?"Ocultar senha":"Mostrar senha"}">${ms(verPw?"visibility_off":"visibility")}</button>`:""}</div>`}
+function authHTML(){document.body.classList.add("authmode");const pt=verPw?"text":"password";
+  if(authTab!=="criar")return`<div class="auth">${AUTH_BG}<form class="in" id="fEntrar" onsubmit="event.preventDefault();act('entrar')">
+    <div class="hd"><img src="icons/icon-192.png" alt=""><div class="wm"><b>Persuadir</b><span>Casal</span></div></div>
+    <div class="fields">${fld("lId","Usuário ou e-mail","text","","")}${fld("lPw","Senha",pt,"","pw")}</div>
+    <div class="err" id="oErr"></div>
+    <button class="go" type="submit">Entrar</button>
+    <button class="lk" type="button" data-a="esqueci">Esqueci minha senha</button>
+    <div class="alt">Ainda não tem conta? <button class="lk" type="button" data-a="authTab" data-v="criar">Criar conta</button></div></form></div>`;
+  const P=cad.p,bar=`<div class="bar"><button type="button" class="iconbtn" data-a="cadVolta" aria-label="Voltar">${ms("arrow_back")}</button><div class="prog">${[1,2,3].map(i=>`<i class="${i<=P?"on":""}"></i>`).join("")}</div></div>`;
+  const st=P===1?`<h1>Como você se chama?</h1>${fld("cNome","Nome completo","text",cad.nome)}<div class="sx">${[["M","Masculino"],["F","Feminino"]].map(([v,n])=>`<button type="button" class="${cad.sexo===v?"on":""}" data-a="cadSexo" data-v="${v}">${n}</button>`).join("")}</div>`
+    :P===2?`<h1>Seu acesso</h1><div class="fields">${fld("cUser","Usuário","text",cad.user,"at")}${fld("cMail","E-mail","email",cad.email)}</div>`
+    :`<h1>Crie uma senha</h1><div class="fields">${fld("cPw","Senha",pt,cad.pw,"pw")}${fld("cPw2","Repita a senha",pt,cad.pw2,"pw")}</div>`;
+  return`<div class="auth">${AUTH_BG}<form class="in" onsubmit="event.preventDefault();act('cadSegue')">${bar}<div class="stp">${st}</div><div class="err" id="oErr"></div><button class="go" type="submit">${P<3?"Continuar":"Criar conta"}</button>
+    ${P===1?`<div class="alt">Já tem conta? <button class="lk" type="button" data-a="authTab" data-v="entrar">Entrar</button></div>`:""}</form></div>`}
+function cadLer(){const v=id=>{const e=$("#"+id);return e?e.value:null};const n=v("cNome"),u=v("cUser"),e=v("cMail"),p=v("cPw"),p2=v("cPw2");
+  if(n!=null)cad.nome=n.trim();if(u!=null)cad.user=u.trim().toLowerCase().replace(/^@/,"");if(e!=null)cad.email=e.trim().toLowerCase();if(p!=null)cad.pw=p;if(p2!=null)cad.pw2=p2}
+function cadFoco(){setTimeout(()=>{const i=document.querySelector(".auth input");if(i&&!i.value)i.focus()},60)}
+function actAuth(a,el){
+  switch(a){
+  case "authTab":authTab=el.dataset.v;cad.p=1;verPw=false;render();cadFoco();return;
+  case "sair":authTab="entrar";cad.p=1;verPw=false;return false;
+  case "verPw":{cadLer();const id=document.activeElement&&document.activeElement.id;verPw=!verPw;const lid=$("#lId")&&$("#lId").value,lpw=$("#lPw")&&$("#lPw").value;render();if(lid!=null&&$("#lId")){$("#lId").value=lid;$("#lPw").value=lpw}return}
+  case "cadSexo":cadLer();cad.sexo=el.dataset.v;render();return;
+  case "cadVolta":cadLer();oErr("");if(cad.p>1){cad.p--;render()}else{authTab="entrar";render()}return;
+  case "cadSegue":{cadLer();
+    if(cad.p===1){if(cad.nome.split(/\s+/).length<2)return oErr("Escreva nome e sobrenome.");if(!cad.sexo)return oErr("Escolha uma opção.")}
+    if(cad.p===2){if(!/^[a-z0-9._]{3,}$/.test(cad.user))return oErr("Usuário: 3 ou mais letras, números, ponto ou sublinhado.");if(!/.+@.+\..+/.test(cad.email))return oErr("Confira o e-mail.")}
+    if(cad.p<3){cad.p++;oErr("");render();cadFoco();return}
+    if(cad.pw.length<6)return oErr("A senha precisa de pelo menos 6 caracteres.");if(cad.pw!==cad.pw2)return oErr("As senhas não conferem.");
+    contaCriarCad();return}
+  }
+  return false}
+
+function busy(b){const x=document.querySelector(".auth .go");if(x)x.disabled=b}
+async function contaCriarCad(){const{nome:n,user:u,email:e,pw:p,sexo:sx}=cad;oErr("");busy(true);
+  try{const ex=await FS.doc(`usernames/${u}`).get();if(ex.exists){busy(false);cad.p=2;render();return oErr("Esse usuário já está em uso.")}
+    const cr=await FA.createUserWithEmailAndPassword(e,p),uid=cr.user.uid;await FS.doc(`usernames/${u}`).set({uid,email:e});
+    const conta=Object.assign(contaNova(n,u,e,"x"),{sexo:sx,av:avDef(sx),capaV:"linha"});delete conta.senhaH;await FS.doc(`users/${uid}`).set(Object.assign(conta,{criadoEm:Date.now(),st:{status:"auto",visto:Date.now()}}));
+    cad={p:1,nome:"",sexo:"",user:"",email:"",pw:"",pw2:""};fx("ok");toast(`Bem-vindo, ${n.split(" ")[0]}!`)}catch(err){busy(false);oErr(errTxt(err))}}
 
 /* ================= AÇÕES ================= */
 function act0(a,el){const P=S.perfil,o=outro();
