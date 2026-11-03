@@ -590,6 +590,7 @@ body.authmode .top,body.authmode #tabs,body.authmode #iaOrb{display:none!importa
 .auth .bgl path+path{animation-delay:.45s}
 .auth .bgl circle{fill:var(--primary);opacity:0;transform-box:fill-box;transform-origin:center;animation:alDot .6s 2.3s forwards,alPulse 3.6s 3s ease-in-out infinite}
 @keyframes alDraw{to{stroke-dashoffset:0}}@keyframes alDot{to{opacity:.22}}@keyframes alPulse{50%{transform:scale(1.25)}}
+.auth .atema{position:fixed;z-index:2;top:calc(8px + env(safe-area-inset-top,0px));right:max(8px,env(safe-area-inset-right,0px))}
 .auth .in{position:relative;z-index:1;width:100%;max-width:380px;margin:auto 0;display:flex;flex-direction:column;gap:22px;animation:alUp .6s cubic-bezier(.2,.8,.2,1) both}
 @keyframes alUp{from{opacity:0;transform:translateY(14px)}}
 .auth .hd{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
@@ -2511,8 +2512,8 @@ let cad={p:1,nome:"",sexo:"",user:"",email:"",pw:"",pw2:""},verPw=false;
 const saudHora=()=>{const h=new Date().getHours();return h<5?"Boa noite":h<12?"Bom dia":h<18?"Boa tarde":"Boa noite"};
 const AUTH_BG=`<svg class="bgl" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path pathLength="1" d="M-20 820C40 640 60 470 150 340S197 160 197 40"/><path pathLength="1" d="M420 820C360 640 340 470 250 340S203 160 203 40"/></svg>`;
 function fld(id,lab,type,val,extra){return`<div class="fl ${extra==="at"?"at":""}"><input id="${id}" type="${type}" placeholder=" " value="${esc(val||"")}" autocomplete="${{lId:"username",lPw:"current-password",cNome:"name",cUser:"username",cMail:"email",cPw:"new-password",cPw2:"new-password"}[id]||"off"}" ${type==="text"&&/User|lId/.test(id)?'autocapitalize="none" spellcheck="false"':""}><label for="${id}">${lab}</label>${extra==="at"?'<span class="pre">@</span>':""}${type==="password"||extra==="pw"?`<button type="button" class="eye" data-a="verPw" aria-label="${verPw?"Ocultar senha":"Mostrar senha"}">${ms(verPw?"visibility_off":"visibility")}</button>`:""}</div>`}
-function authHTML(){document.body.classList.add("authmode");const pt=verPw?"text":"password";
-  if(authTab!=="criar")return`<div class="auth">${AUTH_BG}<form class="in" id="fEntrar" onsubmit="event.preventDefault();act('entrar')">
+function authHTML(){document.body.classList.add("authmode");try{const t=localStorage.getItem("pc-tema");if(t&&S.cfg.theme!==t){S.cfg.theme=t;document.documentElement.dataset.theme=t}}catch(e){}const pt=verPw?"text":"password",TB=`<button type="button" class="iconbtn atema" data-a="temaAuth" aria-label="${temaEscuro()?"Tema claro":"Tema escuro"}">${ms(temaEscuro()?"light_mode":"dark_mode")}</button>`;
+  if(authTab!=="criar")return`<div class="auth">${AUTH_BG}${TB}<form class="in" id="fEntrar" onsubmit="event.preventDefault();act('entrar')">
     <div class="hd"><img src="icons/icon-192.png" alt=""><div class="wm"><b>Persuadir</b><span>Casal</span></div></div>
     <div class="fields">${fld("lId","Usuário ou e-mail","text","","")}${fld("lPw","Senha",pt,"","pw")}</div>
     <div class="err" id="oErr"></div>
@@ -2523,7 +2524,7 @@ function authHTML(){document.body.classList.add("authmode");const pt=verPw?"text
   const st=P===1?`<h1>Como você se chama?</h1>${fld("cNome","Nome completo","text",cad.nome)}<div class="sx">${[["M","Masculino"],["F","Feminino"]].map(([v,n])=>`<button type="button" class="${cad.sexo===v?"on":""}" data-a="cadSexo" data-v="${v}">${n}</button>`).join("")}</div>`
     :P===2?`<h1>Seu acesso</h1><div class="fields">${fld("cUser","Usuário","text",cad.user,"at")}${fld("cMail","E-mail","email",cad.email)}</div>`
     :`<h1>Crie uma senha</h1><div class="fields">${fld("cPw","Senha",pt,cad.pw,"pw")}${fld("cPw2","Repita a senha",pt,cad.pw2,"pw")}</div>`;
-  return`<div class="auth">${AUTH_BG}<form class="in" onsubmit="event.preventDefault();act('cadSegue')">${bar}<div class="stp">${st}</div><div class="err" id="oErr"></div><button class="go" type="submit">${P<3?"Continuar":"Criar conta"}</button>
+  return`<div class="auth">${AUTH_BG}${TB}<form class="in" onsubmit="event.preventDefault();act('cadSegue')">${bar}<div class="stp">${st}</div><div class="err" id="oErr"></div><button class="go" type="submit">${P<3?"Continuar":"Criar conta"}</button>
     ${P===1?`<div class="alt">Já tem conta? <button class="lk" type="button" data-a="authTab" data-v="entrar">Entrar</button></div>`:""}</form></div>`}
 function cadLer(){const v=id=>{const e=$("#"+id);return e?e.value:null};const n=v("cNome"),u=v("cUser"),e=v("cMail"),p=v("cPw"),p2=v("cPw2");
   if(n!=null)cad.nome=n.trim();if(u!=null)cad.user=u.trim().toLowerCase().replace(/^@/,"");if(e!=null)cad.email=e.trim().toLowerCase();if(p!=null)cad.pw=p;if(p2!=null)cad.pw2=p2}
@@ -2533,6 +2534,7 @@ function actAuth(a,el){
   case "authTab":authTab=el.dataset.v;cad.p=1;verPw=false;render();cadFoco();return;
   case "sair":authTab="entrar";cad.p=1;verPw=false;return false;
   case "verPw":{cadLer();const id=document.activeElement&&document.activeElement.id;verPw=!verPw;const lid=$("#lId")&&$("#lId").value,lpw=$("#lPw")&&$("#lPw").value;render();if(lid!=null&&$("#lId")){$("#lId").value=lid;$("#lPw").value=lpw}return}
+  case "temaAuth":{cadLer();const t=temaEscuro()?"light":"dark";S.cfg.theme=t;try{localStorage.setItem("pc-tema",t)}catch(e){}const lid=$("#lId")&&$("#lId").value;render();if(lid&&$("#lId"))$("#lId").value=lid;return}
   case "cadSexo":cadLer();cad.sexo=el.dataset.v;render();return;
   case "cadVolta":cadLer();oErr("");if(cad.p>1){cad.p--;render()}else{authTab="entrar";render()}return;
   case "cadSegue":{cadLer();
